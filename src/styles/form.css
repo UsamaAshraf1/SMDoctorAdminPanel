@@ -1,0 +1,102 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.loginpage {
+  display: flex;
+}
+.tab1 {
+  flex: 0.95;
+  flex-grow: 0.95;
+}
+.tab2 {
+  flex: 1.05;
+  flex-grow: 1.05;
+}
+.logosection {
+  background-color: rgba(61, 162, 218, .9);
+  height: 900px;
+  overflow: hidden;
+  position: relative;
+}
+.vector1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 400px;
+}
+.vector2 {
+  position: absolute;
+  transform: translateY(-300px);
+  height: 400px;
+  bottom: 0;
+  left: 0;
+}
+.woodmark {
+  position: absolute;
+  width: 122px;
+  height: 161px;
+  top: 60%;
+  right: 85%;
+  transform: translate(50%, -50%);
+}
+.formsection {
+  background-color: #fcfcfc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.heading,
+.form {
+  text-align: center;
+  width: 392px;
+}
+.h3 {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+}
+.head-pg {
+  margin-top: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+.fields-group {
+  border: 1px solid #f4f5f7;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 4px -1px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+}
+.form-field,
+.form-btn {
+  border: none;
+  width: 392px;
+  height: 48px;
+}
+.email {
+  border-bottom: 1px solid #f4f5f7;
+}
+.form-field {
+  padding-left: 16px;
+}
+.form-field:focus {
+  outline: 0;
+}
+.form-btn {
+  font-weight: 500;
+  font-size: 16px;
+  color: #000000;
+  border: none;
+  margin-top: 24px;
+  border-radius: 8px;
+  background-color: rgba(61, 162, 218, .9);
+}
+.forgot {
+  margin-top: 16px;
+  text-decoration: none;
+  color: #000000;
+}

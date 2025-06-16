@@ -1,0 +1,166 @@
+.sidebar {
+  width: 255px;
+  height: 100%;
+  background-color: #ffffff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 30;
+}
+.woodmark-navbar {
+  text-align: center;
+}
+.logo-navbar {
+  margin-top: 22px;
+  width: 160px;
+  height: 80px;
+}
+.navigation {
+  margin-top: 24px;
+  /* height: 100%; */
+}
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  /* gap: 5px; */
+  list-style-type: none;
+  margin: 0 22px;
+}
+.nav-item {
+  display: flex;
+  gap: 14px;
+  padding: 5px 5px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+}
+/* .nav-item :hover {
+  width: 100%;
+  background-color: #e0d9fa;
+  border-radius: 8px;
+} */
+
+.bar-link :focus {
+  width: 100%;
+  background-color: rgba(61, 162, 218, .9);
+  border-radius: 8px;
+  /* margin-bottom: 10px; */
+}
+.focused {
+  width: 100%;
+  background-color: rgba(61, 162, 218, .9);
+
+  border-radius: 8px;
+}
+
+.focused a span {
+  color: white !important;
+}
+.big-font {
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+}
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  /* border: 1px black dotted; */
+  /* text-align: center; */
+}
+.icon {
+  /* width: fit-content; */
+  width: 100%;
+}
+.adminask {
+  margin-top: auto;
+  background-color: rgba(94, 99, 102, 0.1);
+  border-radius: 8px;
+}
+.logout {
+  cursor: pointer;
+  font-size: 13px;
+  color: #cc5f5f;
+}
+
+/* topbar */
+.topbar {
+  width: 100%;
+  height: 72px;
+  padding: 20px 30px;
+  background: #ffffff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08),
+    0px 0px 2px -1px rgba(0, 0, 0, 0.08);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+}
+.top-menu {
+  padding-left: 255px;
+  display: flex;
+  justify-content: space-between;
+}
+.page-heading {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #45464e;
+}
+.prof-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 12px;
+  gap: 10px;
+  height: 32px;
+  /* background: #fef5ea; */
+  border-radius: 8px;
+}
+.store-name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  padding: 8px 16px;
+  align-items: center;
+  height: 40px;
+  border-radius: 12px;
+  border: none;
+  background-color: rgba(61, 162, 218, .7);
+}
+.store-option {
+  background-color: #000000 !important;
+  width: 200px;
+  border-radius: 20px;
+}
+.store-name :not(:focus) {
+  border: none;
+}
+.profile {
+  display: flex;
+  gap: 20px;
+}
+.circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+.logout-div {
+  margin-top: auto;
+  margin-bottom: 10px;
+}

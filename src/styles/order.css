@@ -1,0 +1,263 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.order-content {
+  background-color: #fcfcfc;
+  margin-top: 72px;
+  margin-left: 255px;
+  padding: 18px 33px;
+}
+.order-header {
+  display: flex;
+  justify-content: space-between;
+}
+.header-div {
+  display: flex;
+  gap: 24px;
+}
+.oheader {
+  display: flex;
+  gap: 10px;
+}
+.order-heading {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+  color: #45464e;
+}
+.table-heading {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+  color: #45464e;
+  padding: 5px 15px;
+  border-radius: 8px;
+}
+.table-heading-bg {
+  background-color: #e0d9fa;
+}
+.head-value {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 30px;
+  color: #6e7079;
+}
+.mark {
+  /* padding: 10px 16px; */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+
+  /* gap: 10px; */
+  /* width: 199px; */
+  align-items: center;
+  height: 36px;
+  color: white;
+  background: #1c1d22;
+  color: white;
+  border-radius: 12px;
+}
+.note {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17px 16px;
+  gap: 10px;
+  width: 135px;
+  height: 36px;
+  background: #cc5f5f;
+  /* color: white; */
+  border-radius: 12px;
+}
+.btn-text {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  display: flex;
+  align-self: center;
+  color: #ffffff;
+}
+
+/* body */
+.cards {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  min-width: 40%;
+  width: 35%;
+  padding: 11px 15px;
+  gap: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+}
+.ctop {
+  display: flex;
+  gap: 20px;
+  /* justify-content: space-between; */
+}
+.chead {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #8b8d97;
+}
+.ctext {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 17px;
+  color: #45464e;
+}
+.card-iconholder {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+}
+.card-icon {
+  width: fit-content;
+}
+.cbottem {
+  display: flex;
+  justify-content: space-between;
+}
+.btm-part {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.order-table-div {
+  margin-top: 30px;
+  padding: 20px;
+  background: #ffffff;
+  border: none;
+  border-radius: 12px;
+}
+.order-table {
+  box-shadow: none;
+  background-color: white;
+  border: none;
+  width: 100%;
+}
+.tab-header {
+  display: flex;
+  gap: 30px;
+  padding-bottom: 10px;
+}
+.order-table-row {
+  border: none;
+  background-color: white;
+}
+.order-table-head {
+  border-top: 1px solid #6e7079;
+  border-bottom: 1px solid #6e7079;
+}
+.content-footer {
+  margin-top: 20px;
+  display: flex;
+}
+.footer-left {
+  width: 43%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-right {
+  width: 57%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-ctop {
+  display: flex;
+  justify-content: space-between;
+}
+.c-btns {
+  display: flex;
+  gap: 10px;
+}
+.card-btn {
+  padding: 4px 11px;
+  gap: 10px;
+  height: 23px;
+  border-radius: 8px;
+  border: none;
+}
+.footer-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 11px 15px;
+  gap: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+}
+.order-trail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.coupon {
+  align-self: flex-end;
+  display: flex;
+  gap: 10px;
+}
+.coupon-inp {
+  padding: 8px;
+  gap: 10px;
+  width: 176px;
+  height: 29px;
+  border: 1px solid #cfd3d5;
+  border-radius: 4px;
+  color: #abafb1;
+  font-size: 12px;
+}
+.coupon-btn {
+  padding: 8px;
+  gap: 10px;
+  width: 91px;
+  height: 29px;
+  border: 1px solid #cfd3d5;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #53545c;
+}
+.total-card {
+  display: flex;
+  align-self: flex-end;
+  flex-direction: column;
+  width: 70%;
+  padding: 11px 15px;
+  gap: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+}
+.order-total {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  gap: 10px;
+}
+.total-row {
+  align-self: flex-end;
+  display: flex;
+  gap: 3px;
+}

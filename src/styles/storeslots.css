@@ -1,0 +1,40 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 3%;
+}
+.slot-headers {
+  width: 16%;
+  height: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.days {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.w {
+  width: 16%;
+  height: 48px;
+  border-radius: 8px;
+}
+.day {
+  background-color: rgba(61, 162, 218, .9);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dname {
+  font-family: "Poppins";
+}
+.s-btn {
+  font-size: large;
+  height: 40px;
+  border: 1px solid #e0d9fa;
+}
