@@ -1,44 +1,96 @@
 import "../styles/addforms.css";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import backicon from "../assets/back.png";
+import { useEffect, useState } from "react";
+import { url } from "../utils/urls";
+import axios from "axios";
 
 export default function DoctorDetail(props) {
   const navigate = useNavigate();
+  const [doctor, setDoctor] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // New state for loading
   const doctordetail = localStorage.getItem("user");
   const doctorData = JSON.parse(doctordetail);
-  const doctor = doctorData?.data;
-  console.log(doctor);
+  const doctorId = doctorData?.data?.id;
+
+  const fetchDoctorById = async () => {
+    try {
+      setIsLoading(true); // Set loading to true before fetching
+      const response = await axios.get(
+        `${url}/v1/doctor/get-by-id?id=${doctorId}`
+      );
+      setDoctor(response.data.data);
+    } catch (error) {
+      console.error("Fetch doctor error:", error);
+    } finally {
+      setIsLoading(false); // Set loading to false after fetching
+    }
+  };
+
+  useEffect(() => {
+    fetchDoctorById();
+  }, []);
 
   useEffect(() => {
     props.setName("Profile");
   }, [props]);
+
+  if (isLoading) {
+    return (
+      <div className="content">
+        <div className="loader-container">
+          <div className="loader"></div>
+          <p>Loading doctor details...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!doctor) {
     return <div className="content">Doctor not found</div>;
   }
 
   return (
     <div className="content">
-      {/* <div className="form-header">
-       
-      </div> */}
-
       <div className="doctor-detail-container">
-        {/* Profile Header */}
-        <div className="doctor-profile-header">
-          {doctor.profilePhoto ? (
-            <img
-              src={doctor.profilePhoto}
-              alt={`${doctor.name}'s profile`}
-              className="doctor-profile-photo"
-            />
-          ) : (
-            <div className="doctor-profile-placeholder">No Photo</div>
-          )}
-          <div className="doctor-profile-info">
-            <h1>{doctor.name}</h1>
-            <p className="professional-title">{doctor.professionalTitle}</p>
-            <p className="average-rating">Rating: {doctor.averageRating} / 5</p>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="doctor-profile-header">
+            {doctor.profilePhoto ? (
+              <img
+                src={doctor.profilePhoto}
+                alt={`${doctor.name}'s profile`}
+                className="doctor-profile-photo"
+              />
+            ) : (
+              <div className="doctor-profile-placeholder">No Photo</div>
+            )}
+            <div className="doctor-profile-info">
+              <h1>{doctor.name}</h1>
+              <p className="professional-title">{doctor.professionalTitle}</p>
+              <p className="average-rating">
+                Rating: {doctor.averageRating} / 5
+              </p>
+            </div>
+          </div>
+          <div>
+            <button
+              style={{
+                minWidth: "max-content",
+                padding: "10px 20px",
+                border: "none",
+                background: "rgba(61, 162, 218, .9)",
+                color: "white",
+                fontSize: "large",
+                cursor: "pointer",
+                borderRadius: "5px",
+              }}
+              onClick={() => {
+                navigate(`/doctors/add-doctor`, {
+                  state: { data: doctor },
+                });
+              }}
+            >
+              Edit
+            </button>
           </div>
         </div>
 
@@ -46,9 +98,6 @@ export default function DoctorDetail(props) {
         <div className="doctor-details">
           <h2>Professional Information</h2>
           <div className="detail-grid">
-            {/* <div className="detail-item">
-              <strong>ID:</strong> {doctor.id}
-            </div> */}
             <div className="detail-item">
               <strong>Department:</strong> {doctor.department?.name || "N/A"}
             </div>

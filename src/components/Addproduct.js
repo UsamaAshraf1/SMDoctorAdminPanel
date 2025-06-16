@@ -177,43 +177,14 @@ export default function Addproduct(props) {
   // Submit doctor
   const formSubmit = async (formData) => {
     try {
-      const endpoint = `${url}/v1/doctor/create`;
+      const endpoint = `${url}/v1/doctor/update`;
       //  previousData?.id
       //   ? `${url}/v1/doctor/create`
       //   : `${url}/v1/doctor/update`;
-      const response = await axios.post(endpoint, formData, {
-        headers: { authtoken: authToken, sessionid: session_id },
-      });
-      toast.success(previousData?.id ? "Doctor updated" : "Doctor created");
-      setDoctor({
-        name: "",
-        gender: "",
-        nationality: "",
-        personalMobileNumber: "",
-        personalEmailAddress: "",
-        licenseExpiryDate: "",
-        regulatingAuthority: "",
-        professionalTitle: "",
-        fees: "",
-        primaryLocation: "",
-        experience: "",
-        languages: [],
-        surgeon: false,
-        specialties: [],
-        educationCertifications: {},
-        degreeQualification: "",
-        universityName: "",
-        yearOfGraduation: "",
-        averageRating: "",
-        aboutMe: "",
-        department_id: "",
-      });
-      setProfilePhoto(null);
-      setDegreeCertificate(null);
-      setSpecialistCertification(null);
-      setMedia("");
-      props.setPreviousData?.(null);
-      navigate("/doctors"); // Adjust to your route
+      const response = await axios.put(endpoint, formData);
+      toast.success("Doctor updated");
+
+      navigate("/doctors_detail"); // Adjust to your route
     } catch (error) {
       console.error("Form submit error:", error);
       toast.error(error.response?.data?.error || "Request failed");
@@ -267,7 +238,7 @@ export default function Addproduct(props) {
             <button
               className="back-btn"
               type="button"
-              onClick={() => navigate("/doctors")}
+              onClick={() => navigate("/doctors_detail")}
             >
               <img src={backicon} alt="back" className="back-icon" />
             </button>
