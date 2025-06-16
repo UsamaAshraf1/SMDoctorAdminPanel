@@ -128,8 +128,7 @@ export default function DoctorDetail(props) {
           <p className="about-me">
             {doctor.aboutMe || "No description available."}
           </p>
-
-          {/* <h2>Department Details</h2>
+          <h2>Department Details</h2>
           <div className="detail-grid">
             <div className="detail-item">
               <strong>Department Name:</strong>{" "}
@@ -142,7 +141,17 @@ export default function DoctorDetail(props) {
             <div className="detail-item">
               <strong>Description:</strong> {doctor.department?.des || "N/A"}
             </div>
-          </div> */}
+          </div>
+
+          <h2>Credentials</h2>
+          <div className="detail-grid">
+            <div className="detail-item">
+              <strong>Email:</strong> {doctor.email || "N/A"}
+            </div>
+            <div className="detail-item">
+              <strong>Password:</strong> {doctor.password || "N/A"}
+            </div>
+          </div>
         </div>
       </div>
     </div>
