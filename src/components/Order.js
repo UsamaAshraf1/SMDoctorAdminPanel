@@ -41,6 +41,155 @@ const action = (
   </select>
 );
 
+const RescheduleModal = ({ isOpen, onClose, data, setVlaue }) => {
+  const [selectedDate, setSelectedDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
+  const [selectedSlot, setSelectedSlot] = useState("");
+  const [DoctorSlots, setDoctorSlots] = useState([]);
+
+  const getDoctorSlots = async () => {
+    try {
+      const response = await axios.get(
+        `${url}/v1/doctor/get-slot-by-date?docId=${data?.cart?.doctor_id}&date=${selectedDate}`
+      );
+      setDoctorSlots(response?.data?.slots);
+    } catch (error) {
+      setDoctorSlots([]);
+      console.error("Failed to Status update:", error);
+    }
+  };
+
+  useEffect(() => {
+    getDoctorSlots();
+  }, [selectedDate]);
+
+  console.log(DoctorSlots);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedSlot) {
+      toast.error("Please select a time slot");
+      return;
+    }
+    try {
+      const response = await axios.post(`${url}/v1/order/reschedule-slot`, {
+        order_id: data?.order_id,
+        delete_slot_id: data?.cart?.slotReservations[0]?.slot_reservation_id,
+        doctor_id: data?.cart?.doctor_id,
+        slotTiming: selectedSlot,
+        slotDate: selectedDate,
+        slotDay: DoctorSlots?.day,
+      });
+      toast.success("Reshedule Done");
+      setVlaue("Reschedule");
+      onClose();
+    } catch (error) {
+      console.error("Failed to reschedule:", error);
+      toast.error("Failed to reschedule");
+    }
+  };
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className={`modal-backdrop-new ${isOpen ? "modal-backdrop-new--open" : ""}`}
+      onClick={onClose}
+    >
+      <div
+        className={`modal-panel-new ${isOpen ? "modal-panel-new--open" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-content-new">
+          <div className="modal-header">
+            <h2 className="modal-title">Reschedule Appointment</h2>
+            <button onClick={onClose} className="modal-close">
+              <svg
+                className="modal-close-icon"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="modal-body">
+            <form onSubmit={handleSubmit}>
+              <div className="modal-field">
+                <label className="chead">Select Date</label>
+                <input
+                  type="date"
+                  value={selectedDate}
+                  onChange={(e) => setSelectedDate(e.target.value)}
+                  min={new Date().toISOString().split("T")[0]}
+                  className="ctext w-full border border-gray-300 rounded-md p-2 mt-1"
+                  required
+                />
+              </div>
+
+              <div className="modal-field" style={{ marginTop: "20px" }}>
+                <label className="chead">Available Slots</label>
+                <div className="grid grid-cols-3 gap-2 mt-1">
+                  {DoctorSlots?.slots.map((slot) => (
+                    <button
+                      key={slot}
+                      type="button"
+                      className={`slot-button ctext ${
+                        selectedSlot === slot[0] ? "slot-button--selected" : ""
+                      }`}
+                      onClick={() => setSelectedSlot(slot[0])}
+                    >
+                      {slot[0]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "end",
+                  gap: "10px",
+                  marginTop: "10px",
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={onClose}
+                  style={{
+                    padding: "10px 20px",
+                    background: "gray",
+                    borderRadius: "10px",
+                    border: "none",
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  style={{
+                    padding: "10px 20px",
+                    background: "#3498db",
+                    borderRadius: "10px",
+                    border: "none",
+                  }}
+                >
+                  Reschedule
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 export default function Order() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,6 +203,7 @@ export default function Order() {
   );
   const [orderStatus, setOrderStatus] = useState(presviosData?.order_status);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNewModalOpen, setIsNewModalOpen] = useState(false);
 
   // Debug: Log presviosData to check its structure
   useEffect(() => {
@@ -117,8 +267,19 @@ export default function Order() {
     }
   };
 
+  const handleStatusChange = (e) => {
+    const newStatus = e.target.value;
+    setOrderStatus(newStatus);
+    if (newStatus === "Reschedule") {
+      setIsNewModalOpen(true);
+    }
+  };
+
   useEffect(() => {
-    if (orderStatus !== presviosData?.order_status) {
+    if (
+      orderStatus !== presviosData?.order_status &&
+      orderStatus !== "Reschedule"
+    ) {
       updateOrderStatus();
     }
   }, [orderStatus]);
@@ -159,16 +320,6 @@ export default function Order() {
             </div>
           </div>
           <div className="header-div">
-            {/* <div
-              className="mark"
-              style={{
-                backgroundColor: "black",
-                color: "white",
-                padding: "8px 12px",
-              }}
-            >
-              <span>{presviosData?.order_status || "Unknown"}</span>
-            </div> */}
             <div
               name=""
               id=""
@@ -181,9 +332,7 @@ export default function Order() {
             >
               <select
                 value={orderStatus}
-                onChange={(e) => {
-                  setOrderStatus(e.target.value);
-                }}
+                onChange={handleStatusChange}
                 style={{
                   backgroundColor: "black",
                   color: "white",
@@ -502,6 +651,13 @@ export default function Order() {
           </div>
         </div>
       </div>
+
+      <RescheduleModal
+        isOpen={isNewModalOpen}
+        onClose={() => setIsNewModalOpen(false)}
+        data={presviosData}
+        setVlaue={setOrderStatus}
+      />
 
       <ToastContainer />
     </div>

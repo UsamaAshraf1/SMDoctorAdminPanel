@@ -86,3 +86,122 @@
 .modal-trigger:hover {
   text-decoration: underline;
 }
+
+/* --------------------New Modal-------------- */
+
+.modal-backdrop-new {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.modal-backdrop-new--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-panel-new {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: max-content;
+  width: 620px;
+  max-width: 90vw;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 1001;
+  opacity: 0;
+}
+
+.modal-panel-new--open {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+.modal-content-new {
+  padding: 24px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.modal-close {
+  background: none !important;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: #374151;
+}
+
+.modal-close-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chead {
+  font-size: 14px;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.ctext {
+  font-size: 16px;
+  color: #1f2937;
+}
+
+.slot-button {
+  border: 1px solid #d1d5db; /* Equivalent to border-gray-300 */
+  border-radius: 6px; /* Equivalent to rounded-md */
+  padding: 8px; /* Equivalent to p-2 */
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-left: 10px;
+}
+
+.slot-button:hover {
+  background-color: #f3f4f6; /* Equivalent to hover:bg-gray-100 */
+}
+
+.slot-button--selected {
+  background-color: #2563eb; /* Equivalent to bg-blue-600 */
+  color: #ffffff; /* Equivalent to text-white */
+  border-color: #2563eb; /* Equivalent to border-blue-600 */
+}
