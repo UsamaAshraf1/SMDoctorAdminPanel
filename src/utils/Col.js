@@ -273,7 +273,7 @@ export const COLUMNS_ORDERS = [
       return format(new Date(value), "dd-MM-yyyy h:mm a");
     },
   },
-  {
+   {
     Header: "STATUS",
     accessor: "order_status",
     Cell: (props) => {
@@ -477,6 +477,82 @@ export const COLUMNS_ORDERS = [
                 }}
               />
               <span>Cancelled</span>
+            </div>
+          ) : props.value === "No Show" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <div
+                style={{
+                  height: 6,
+                  width: 6,
+                  backgroundColor: "#991B1B",
+                  borderRadius: 50,
+                }}
+              />
+              <span>No Show</span>
+            </div>
+          ) : props.value === "Doctor Enroute" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <div
+                style={{
+                  height: 6,
+                  width: 6,
+                  backgroundColor: "#991B1B",
+                  borderRadius: 50,
+                }}
+              />
+              <span>Doctor Enroute</span>
+            </div>
+          ) : props.value === "Doctor Arrived" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <div
+                style={{
+                  height: 6,
+                  width: 6,
+                  backgroundColor: "#991B1B",
+                  borderRadius: 50,
+                }}
+              />
+              <span>Doctor Arrived</span>
+            </div>
+          ) : props.value === "Visit Started" ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <div
+                style={{
+                  height: 6,
+                  width: 6,
+                  backgroundColor: "#991B1B",
+                  borderRadius: 50,
+                }}
+              />
+              <span>Visit Started</span>
             </div>
           ) : (
             <div

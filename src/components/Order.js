@@ -9,9 +9,11 @@ import { COLUMNS_ORDER_BOOKING } from "../utils/Col";
 import { usePagination, useTable, useSortBy } from "react-table";
 import { useLocation } from "react-router-dom";
 import { format, parse } from "date-fns";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import backicon from "../assets/back.png";
+import { url } from "../utils/urls";
+import axios from "axios";
 
 const orderStatusList = [
   "Pending Payment",
@@ -46,8 +48,11 @@ export default function Order() {
     location.state ? location.state?.data : null
   );
   const [orderData, setOrderData] = useState(
-    presviosData?.cart?.slotReservations || []
+    presviosData?.cart?.slotReservations?.length > 0
+      ? presviosData?.cart?.slotReservations
+      : presviosData?.cart?.ServiceReservations || []
   );
+  const [orderStatus, setOrderStatus] = useState(presviosData?.order_status);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Debug: Log presviosData to check its structure
@@ -89,7 +94,6 @@ export default function Order() {
 
   const formatBookingTime = (time) => {
     try {
-      // Parse time string (e.g., "16:30:00") and format to "4:30 PM"
       return time
         ? format(parse(time, "HH:mm:ss", new Date()), "h:mm a")
         : "N/A";
@@ -98,6 +102,32 @@ export default function Order() {
       return "N/A";
     }
   };
+
+  const updateOrderStatus = async () => {
+    try {
+      const response = await axios.post(`${url}/v1/order/update`, {
+        order_id: presviosData?.order_id,
+        status: orderStatus,
+      });
+
+      toast.success("Status updated");
+    } catch (error) {
+      console.error("Failed to Status update:", error);
+      toast.error("Failed to Status update");
+    }
+  };
+
+  useEffect(() => {
+    if (orderStatus !== presviosData?.order_status) {
+      updateOrderStatus();
+    }
+  }, [orderStatus]);
+
+  const slotTimeString = orderData[0]?.slotTiming;
+  const currentTime = new Date();
+  const [hours, minutes, seconds] = slotTimeString.split(":").map(Number);
+  const slotTime = new Date(currentTime);
+  slotTime.setHours(hours, minutes, seconds, 0);
 
   return (
     <div>
@@ -129,7 +159,7 @@ export default function Order() {
             </div>
           </div>
           <div className="header-div">
-            <div
+            {/* <div
               className="mark"
               style={{
                 backgroundColor: "black",
@@ -138,6 +168,48 @@ export default function Order() {
               }}
             >
               <span>{presviosData?.order_status || "Unknown"}</span>
+            </div> */}
+            <div
+              name=""
+              id=""
+              className="mark"
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                paddingBottom: "10px",
+              }}
+            >
+              <select
+                value={orderStatus}
+                onChange={(e) => {
+                  setOrderStatus(e.target.value);
+                }}
+                style={{
+                  backgroundColor: "black",
+                  color: "white",
+                  padding: "5px",
+                  border: "none",
+                  outline: "none",
+                }}
+                disabled={
+                  orderStatus === "Completed" || orderStatus === "Cancelled"
+                }
+              >
+                <option value="pending">Pending</option>
+                {presviosData?.cart?.location === "At Home" && (
+                  <>
+                    <option value="Doctor Enroute">Doctor Enroute</option>
+                    <option value="Doctor Arrived">Doctor Arrived</option>
+                    <option value="Visit Started">Visit Started</option>
+                  </>
+                )}
+                <option value="Reschedule">Reschedule</option>
+                <option value="Completed">Completed</option>
+                {currentTime < slotTime && (
+                  <option value="Cancelled">Cancelled</option>
+                )}
+                <option value="No Show">No Show</option>
+              </select>
             </div>
           </div>
         </div>
@@ -258,7 +330,7 @@ export default function Order() {
                   <div className="btm-part">
                     <span className="chead">Payment Method</span>
                     <span className="ctext">
-                      {presviosData?.paymentType|| "N/A"}
+                      {presviosData?.paymentType || "N/A"}
                     </span>
                   </div>
                   <div className="btm-part">
