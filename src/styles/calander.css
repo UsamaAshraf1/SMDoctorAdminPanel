@@ -2,7 +2,7 @@
   max-width: 100%;
   background: white;
   /* border: 1px solid #a0a096; */
-  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-family: "Inter";
   line-height: 1.125em;
 }
 .react-calendar--doubleView {
@@ -43,7 +43,7 @@
   min-width: 44px;
   background: none;
   font-size: x-large;
-  font-family: "Poppins";
+  font-family: "Inter";
 }
 .react-calendar__navigation button:disabled {
   background-color: #f0f0f0;
@@ -161,7 +161,7 @@ abbr[title] {
   border-radius: 8px;
   height: 50px;
   width: 50px;
-  font-family: "Poppins";
+  font-family: "Inter";
   font-size: 18px;
   font-weight: 500;
 }
@@ -172,7 +172,7 @@ abbr[title] {
   gap: 3px;
 }
 .order {
-  font-family: "Poppins";
+  font-family: "Inter";
   height: 40px;
   background-color: green;
   color: white;

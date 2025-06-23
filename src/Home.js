@@ -141,12 +141,12 @@ export default function Home(props) {
                     <span>Dashboard</span>
                   </NavLink>
                 </li>
-                <li className={props.name === "Orders" ? "focused" : ""}>
+                <li className={props.name === "Appointmants" ? "focused" : ""}>
                   <NavLink to="/orders" className="big-font bar-link">
                     <div className="nav-icon">
                       <img src={Bag} alt="union-icon" className="icon" />
                     </div>
-                    <span>Orders</span>
+                    <span>Appointmants</span>
                   </NavLink>
                 </li>
                 {/* <li

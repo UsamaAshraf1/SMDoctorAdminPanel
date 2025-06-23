@@ -22,7 +22,7 @@
   gap: 10px;
 }
 .order-heading {
-  font-family: "Poppins";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -30,7 +30,7 @@
   color: #45464e;
 }
 .table-heading {
-  font-family: "Poppins";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -43,7 +43,7 @@
   background-color: #e0d9fa;
 }
 .head-value {
-  font-family: "Poppins";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

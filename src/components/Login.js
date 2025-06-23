@@ -105,7 +105,7 @@ export default function Login(props) {
     <div className="loginpage" style={{ height: "100vh", overflow: "hidden" }}>
       <section className="logosection tab1">
         <div className="vector1">
-          <img src={vector1} alt="logoimage" />
+          <img src={vector1} alt="logoimage" style={{height:"100vh"}}/>
         </div>
       </section>
       <section className="formsection tab2">

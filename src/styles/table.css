@@ -46,7 +46,7 @@
 }
 .cat-popup {
   width: fit-content;
-  font-family: "Eudoxus Sans";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -74,14 +74,14 @@
   margin-bottom: 24px;
 }
 .bigger-font {
-  font-family: "Eudoxus Sans";
+  font-family: "Inter";
   font-weight: 700;
   font-size: 18px;
   line-height: 24px;
   color: #111827;
 }
 .page-big-headings {
-  font-family: "Eudoxus Sans";
+  font-family: "Inter";
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;

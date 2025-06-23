@@ -358,7 +358,7 @@
 .more-btn {
   border: none;
   background: #fcfcfc;
-  font-family: "Eudoxus Sans";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
@@ -538,7 +538,7 @@
   justify-content: space-between;
 }
 .sellerResheading {
-  font-family: "Eudoxus Sans";
+  font-family: "Inter";
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -593,7 +593,7 @@
 /* Existing styles assumed to be in addforms.css */
 .content {
   padding: 20px;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
 }
 

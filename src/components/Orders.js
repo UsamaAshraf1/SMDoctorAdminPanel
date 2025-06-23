@@ -113,7 +113,7 @@ export default function Orders(props) {
 
   useEffect(() => {
     fetchdata();
-    props.setName("Orders");
+    props.setName("Appointmants");
     setString("");
   }, [storeid]);
 
@@ -181,14 +181,14 @@ export default function Orders(props) {
         <div className="sellers-data">
           <div className="sellers">
             <div>
-              <span
+              {/* <span
                 className="bigger-font"
-                // onClick={(r) => {
-                //   nav("order");
-                // }}
+                onClick={(r) => {
+                  nav("order");
+                }}
               >
                 Customer Order’s Summary
-              </span>
+              </span> */}
             </div>
             {!expState ? (
               <div className="search-div">
