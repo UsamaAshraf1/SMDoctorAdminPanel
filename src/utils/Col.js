@@ -273,7 +273,7 @@ export const COLUMNS_ORDERS = [
       return format(new Date(value), "dd-MM-yyyy h:mm a");
     },
   },
-   {
+  {
     Header: "STATUS",
     accessor: "order_status",
     Cell: (props) => {
@@ -580,6 +580,7 @@ export const COLUMNS_ORDERS = [
   },
   { Header: "TOTAL", accessor: "total_price" },
   { Header: "NAME", accessor: "customer.first_name" },
+  { Header: "Location", accessor: "cart.location" },
   {
     Header: "EMAIL",
     accessor: "customer.email",
