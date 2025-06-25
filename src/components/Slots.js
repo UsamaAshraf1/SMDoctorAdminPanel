@@ -28,7 +28,7 @@ export default function Slots(props) {
   const [data, setData] = useState([]);
   const [popup, setPopup] = useState(false);
   const [selectedSlot, setSelectedSlot] = useState(null); // Store selected slot
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 4, 1)); // Default to May 2025
+  const [currentDate, setCurrentDate] = useState(new Date()); // Default to May 2025
 
   const fetchdata = async (year, month) => {
     try {

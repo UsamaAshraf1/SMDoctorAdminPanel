@@ -235,6 +235,7 @@ export default function Storeslots(props) {
           startTime: data?.startTime ?? "",
           endTime: data?.endTime ?? "",
           doctor_id: selectedDoctorId, // Consistent store_id
+          slot_id: data?.slot_id ?? "",
         });
       };
 
@@ -344,32 +345,79 @@ export default function Storeslots(props) {
 
   // async function handleSubmit(event) {
   //   event.preventDefault();
-  //   const formData = {
-  //     slots: [monday, tuesday, wednesday, thursday, friday, saturday],
-  //   };
-  //   console.log(formData);
-  //   try {
-  //     toast("please wait", {
-  //       progress: true,
-  //     });
-  //     const response = await axios.post(`${url}/v1/doctor/add/slot`, formData, {
-  //       headers: {
-  //         authtoken: authToken,
-  //         sessionid: session_id,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
-  //     if (response) {
-  //       toast.dismiss();
-  //       toast("Request Send", { type: "success" });
-  //       fetchdata();
+
+  //   const slots = [
+  //     monday,
+  //     tuesday,
+  //     wednesday,
+  //     thursday,
+  //     friday,
+  //     saturday,
+  //     sunday,
+  //   ];
+  //   console.log("Slots to submit:", slots);
+
+  //   toast("Submitting slots, please wait", { progress: true });
+
+  //   let allSuccessful = true; // Track if all requests succeed
+
+  //   // Loop through each slot and make individual API calls
+  //   for (const slot of slots) {
+  //     // Skip empty or invalid slots
+  //     if (!slot.day || !slot.doctor_id) {
+  //       console.warn(
+  //         `Skipping invalid slot for ${slot.day || "unknown"}`,
+  //         slot
+  //       );
+  //       allSuccessful = false;
+  //       toast.error(`Invalid slot data for ${slot.day || "unknown"}`);
+  //       continue;
   //     }
+
+  //     try {
+  //       const response = await axios.post(
+  //         `${url}/v1/doctor/add/slot`,
+  //         slot, // Send single slot object
+  //         {
+  //           headers: {
+  //             authtoken: authToken,
+  //             sessionid: session_id,
+  //             "Content-Type": "application/json",
+  //           },
+  //         }
+  //       );
+
+  //       console.log(
+  //         `Slot for ${slot.day} submitted successfully:`,
+  //         response.data
+  //       );
+  //       // toast.success(`Slot for ${slot.day} added successfully`);
+  //     } catch (error) {
+  //       allSuccessful = false;
+  //       const errorMessage =
+  //         error.response?.data?.error || `Failed to add slot for ${slot.day}`;
+  //       console.error(`Error submitting slot for ${slot.day}:`, error);
+  //       // toast.error(errorMessage);
+  //     }
+  //   }
+
+  //   toast.dismiss(); // Clear loading toast
+
+  //   if (allSuccessful) {
+  //     toast.success("All slots added successfully");
+  //   } else {
+  //     toast.error("Some slots failed to add");
+  //   }
+
+  //   // Refresh data after submission
+  //   try {
+  //     await fetchdata();
   //   } catch (error) {
-  //     toast.dismiss();
-  //     toast(error.response.data.error, { type: "error" });
-  //     console.error(error);
+  //     console.error("Error refreshing data:", error);
+  //     toast.error("Failed to refresh slot data");
   //   }
   // }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -382,15 +430,12 @@ export default function Storeslots(props) {
       saturday,
       sunday,
     ];
-    console.log("Slots to submit:", slots);
-
     toast("Submitting slots, please wait", { progress: true });
 
-    let allSuccessful = true; // Track if all requests succeed
+    let allSuccessful = true;
 
-    // Loop through each slot and make individual API calls
     for (const slot of slots) {
-      // Skip empty or invalid slots
+      // Skip invalid slots
       if (!slot.day || !slot.doctor_id) {
         console.warn(
           `Skipping invalid slot for ${slot.day || "unknown"}`,
@@ -401,42 +446,77 @@ export default function Storeslots(props) {
         continue;
       }
 
-      try {
-        const response = await axios.post(
-          `${url}/v1/doctor/add/slot`,
-          slot, // Send single slot object
-          {
-            headers: {
-              authtoken: authToken,
-              sessionid: session_id,
-              "Content-Type": "application/json",
-            },
-          }
-        );
+      console.log(slots);
+      // Check if slot already exists (has an id)
+      const isUpdate = !!slot.slot_id;
 
-        console.log(
-          `Slot for ${slot.day} submitted successfully:`,
-          response.data
-        );
-        // toast.success(`Slot for ${slot.day} added successfully`);
+      try {
+        let response;
+        if (isUpdate) {
+          // Update existing slot
+          response = await axios.put(
+            `${url}/v1/doctor/update/slot`, // Adjust endpoint as per your API
+            {
+              slot_id: slot.slot_id,
+              startTime: slot.startTime,
+              endTime: slot.endTime,
+              booking_status: slot.booking_status,
+              doctor_id: slot.doctor_id,
+            },
+            {
+              headers: {
+                authtoken: authToken,
+                sessionid: session_id,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log(
+            `Slot for ${slot.day} updated successfully:`,
+            response.data
+          );
+        } else {
+          // Add new slot
+          response = await axios.post(
+            `${url}/v1/doctor/add/slot`,
+            {
+              day: slot.day,
+              startTime: slot.startTime,
+              endTime: slot.endTime,
+              booking_status: slot.booking_status,
+              doctor_id: slot.doctor_id,
+            },
+            {
+              headers: {
+                authtoken: authToken,
+                sessionid: session_id,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          console.log(
+            `Slot for ${slot.day} added successfully:`,
+            response.data
+          );
+        }
       } catch (error) {
         allSuccessful = false;
         const errorMessage =
-          error.response?.data?.error || `Failed to add slot for ${slot.day}`;
+          error.response?.data?.error ||
+          `Failed to ${isUpdate ? "update" : "add"} slot for ${slot.day}`;
         console.error(`Error submitting slot for ${slot.day}:`, error);
-        // toast.error(errorMessage);
+        toast.error(errorMessage);
       }
     }
 
-    toast.dismiss(); // Clear loading toast
+    toast.dismiss();
 
     if (allSuccessful) {
-      toast.success("All slots added successfully");
+      toast.success("All slots processed successfully");
     } else {
-      toast.error("Some slots failed to add");
+      toast.error("Some slots failed to process");
     }
 
-    // Refresh data after submission
     try {
       await fetchdata();
     } catch (error) {
